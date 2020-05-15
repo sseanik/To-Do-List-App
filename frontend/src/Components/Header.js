@@ -62,12 +62,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const Header = ({ onSearchTask }) => {
 
-
-
-export const Header = ({ onSearchTask }) => {
   const classes = useStyles();
 
+  // Header App Bar and Search Bar
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -76,21 +75,23 @@ export const Header = ({ onSearchTask }) => {
             Todo List
           </Typography>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={e => onSearchTask(e.target.value)}
-            />         
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ 'aria-label': 'search' }}
+            onChange={e => onSearchTask(e.target.value)}
+          />         
           </div>
         </Toolbar>
       </AppBar>
     </div>
   );
 }
+
+export default Header;

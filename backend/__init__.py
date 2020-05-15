@@ -15,6 +15,16 @@ def databaseExecute(query, parameters):
     except:
         return False
 
+def getAutoID(task):
+    con = sqlite3.connect('database/database.db')
+    cur = con.cursor()
+    cur.execute("SELECT * FROM tasks WHERE description = ?", (task,))
+    ids = cur.fetchall()
+    con.commit()
+    con.close()
+    return max(ids)[0]
+
+
 @app.route('/getTasks', methods=['GET'])
 def getTasks():
     # Connect to the database
@@ -22,24 +32,32 @@ def getTasks():
     cur = con.cursor()
     # Extract all tasks
     cur.execute("SELECT * FROM tasks")
-    tasks = cur.fetchall()
+    listOfTuples = cur.fetchall()
     con.close()
+    tasks = []
+    for tup in listOfTuples:
+        tasks.append({'id': tup[0],
+                      'checked': tup[1],
+                      'description': tup[2],
+                    })
     return jsonify({'tasks': tasks})
 
 
 @app.route('/addTask', methods=['POST'])
 def addTask():
     # Collect the description
-    description = request.form.get('description')
+    description = request.get_json()['description']
     # Add new task to database
     query = "INSERT INTO tasks (checked, description) VALUES (?, ?)"
     result = databaseExecute(query, (False, description))
-    return jsonify(success=result)
+    newID = getAutoID(description)
+    return jsonify({'id': newID})
 
 @app.route('/editTask', methods=['PUT'])
 def editTask():
     # Collect the id and description of current task
-    id = request.form.get('id')
+    id = request.get_json()['id']
+    description = request.get_json()['description']
     # Change the specified task's description
     query = "UPDATE tasks SET description = ? WHERE id = ?"
     result = databaseExecute(query, (description, id))
@@ -48,8 +66,8 @@ def editTask():
 @app.route('/checkTask', methods=['PUT'])
 def checkTask():
     # Collect the id of a current task
-    id = request.form.get('id')
-    checked = request.form.get('checked')
+    id = request.get_json()['id']
+    checked = request.get_json()['checked']
     # Set the specified task to completed or not completed
     query = "UPDATE tasks SET checked = ? WHERE id = ?"
     result = databaseExecute(query, (checked, id))
@@ -58,10 +76,10 @@ def checkTask():
 @app.route('/deleteTask', methods=['DELETE'])
 def deleteTask():
     # Collect the id of a current task
-    id = request.form.get('id')
+    taskID = int(request.get_json()['id'])
     # Delete task
     query = "DELETE FROM tasks WHERE id = ?"
-    result = databaseExecute(query, id)
+    result = databaseExecute(query, (taskID,))
     return jsonify(success=result)
 
 if __name__== "__main__":
