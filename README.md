@@ -15,4 +15,6 @@
 
 **Build**:
 
-```docker-compose up --build```
+Database: ```sqlite3 database.db < schema.sql```
+
+Docker: ```docker-compose up --build```
