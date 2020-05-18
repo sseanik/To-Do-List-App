@@ -2,17 +2,17 @@
 
 ## Live Demo: http://128.199.248.221:5000/
 
-Frontend: ReactJS + Material UI
+**Frontend**: ReactJS + Material UI
 
-Backend: Flask + SQLite3
+**Backend**: Flask + SQLite3
 
-Functionality:
+**Functionality**:
 
 * Add a task
 * Edit a task
 * Remove a task
 * Search for a task
 
-Build:
+**Build**:
 
 ```docker-compose up --build```
