@@ -111,7 +111,7 @@ const Tasks = ({ tasks, onDeleteTask, onEditTask, onEditSearchTask, onDeleteSear
             </ListItem>
           )
         }
-    })}
+    return true})}
     </List>
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Edit Task</DialogTitle>
