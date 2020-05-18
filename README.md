@@ -12,3 +12,7 @@ Functionality:
 * Edit a task
 * Remove a task
 * Search for a task
+
+Build:
+
+```docker-compose up --build```
