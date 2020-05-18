@@ -1,7 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import sqlite3
 
-app = Flask(__name__)
+app = Flask(__name__,)
+app._static_folder = '../frontend/build/'
+app._static_url_path='/'
 
 # Helper function for adding, editing and deleting from database
 def databaseExecute(query, parameters):
@@ -24,6 +26,10 @@ def getAutoID(task):
     con.close()
     return max(ids)[0]
 
+
+@app.route('/')
+def index():
+    return 'Api'
 
 @app.route('/getTasks', methods=['GET'])
 def getTasks():
@@ -83,5 +89,6 @@ def deleteTask():
     return jsonify(success=result)
 
 if __name__== "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
+
 
