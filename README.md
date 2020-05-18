@@ -1,25 +1,14 @@
-Flask Backend
-React Frontend
+# To Do List App
 
-SQLite3 to store data
-otherwise localstorage stores data
+## Live Demo:
 
+Frontend: ReactJS + Material UI
 
-id(int, PK), checked(boolean), description(string)
+Backend: Flask + SQLite3
 
+Functionality:
 
-TO DO LIST								  SIGN UP | LOGIN
-
-
-[ x ]   Title						       Date   [ Edit ] [ Delete ]
-[ x ]	Description Description Description Description Description   [ Edit ] [ Delete ]
-
-[ o ]   Title						       Date   [ Edit ] [ Delete ]
-[ o ]	Description Description Description Description Description   [ Edit ] [ Delete ]
-
-[ x ]   Title						       Date   [ Edit ] [ Delete ]
-[ x ]	Description Description Description Description Description   [ Edit ] [ Delete ]
-
-[ o ]   Title						       Date   [ Edit ] [ Delete ]
-[ o ]	Description Description Description Description Description   [ Edit ] [ Delete ]
-
+* Add a task
+* Edit a task
+* Remove a task
+* Search for a task
