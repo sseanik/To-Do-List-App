@@ -19,8 +19,8 @@ Database: ```sqlite3 database.db < schema.sql```
 
 Docker: ```docker-compose up --build```
 
-**To Finish**:
-
+**To Do**:
+* Fix Arrow Function Warnings
 * Dockerise Nginx
 * Reverse Proxy to domain
 * Deploy container to Digital Ocean
