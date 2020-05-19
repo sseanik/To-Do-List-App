@@ -1,6 +1,6 @@
 # To Do List App
 
-## Live Demo: http://128.199.248.221:5000/
+## Live Demo: http://seanik.codes/
 
 **Frontend**: ReactJS + Material UI
 
@@ -18,8 +18,3 @@
 Database: ```sqlite3 database.db < schema.sql```
 
 Docker: ```docker-compose up --build```
-
-**To Do**:
-* Dockerise Nginx
-* Reverse Proxy to domain
-* Deploy container to Digital Ocean
