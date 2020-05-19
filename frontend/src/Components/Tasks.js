@@ -63,7 +63,7 @@ const Tasks = ({ tasks, onDeleteTask, onEditTask, onEditSearchTask, onDeleteSear
                 task.checked = 0
               }
               // Update task as checked/not checked
-              const res = await fetch('/checkTask', {
+              const res = await fetch('/api/checkTask', {
                 method: 'PUT',
                 headers: {
                   "Content-Type": "application/json"
@@ -91,7 +91,7 @@ const Tasks = ({ tasks, onDeleteTask, onEditTask, onEditSearchTask, onDeleteSear
           <IconButton aria-label="Delete Task"
             onClick={async() => {
               // Delete task
-              const res = await fetch('/deleteTask', {
+              const res = await fetch('/api/deleteTask', {
                 method: 'DELETE',
                 headers: {
                   "Content-Type": "application/json"
@@ -131,7 +131,7 @@ const Tasks = ({ tasks, onDeleteTask, onEditTask, onEditSearchTask, onDeleteSear
       </Button>
       <Button onClick={async() => {
         // Update task with new description
-        const res = await fetch('/editTask', {
+        const res = await fetch('/api/editTask', {
           method: 'PUT',
           headers: {
             "Content-Type": "application/json"

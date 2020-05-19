@@ -25,7 +25,7 @@ def getAutoID(task):
     return max(ids)[0]
 
 
-@app.route('/getTasks', methods=['GET'])
+@app.route('/api/getTasks', methods=['GET'])
 def getTasks():
     # Connect to the database
     con = sqlite3.connect('database/database.db')
@@ -43,7 +43,7 @@ def getTasks():
     return jsonify({'tasks': tasks})
 
 
-@app.route('/addTask', methods=['POST'])
+@app.route('/api/addTask', methods=['POST'])
 def addTask():
     # Collect the description
     description = request.get_json()['description']
@@ -53,7 +53,7 @@ def addTask():
     newID = getAutoID(description)
     return jsonify({'id': newID})
 
-@app.route('/editTask', methods=['PUT'])
+@app.route('/api/editTask', methods=['PUT'])
 def editTask():
     # Collect the id and description of current task
     id = request.get_json()['id']
@@ -63,7 +63,7 @@ def editTask():
     result = databaseExecute(query, (description, id))
     return jsonify(success=result)
 
-@app.route('/checkTask', methods=['PUT'])
+@app.route('/api/checkTask', methods=['PUT'])
 def checkTask():
     # Collect the id of a current task
     id = request.get_json()['id']
@@ -73,7 +73,7 @@ def checkTask():
     result = databaseExecute(query, (checked, id))
     return jsonify(success=result)
 
-@app.route('/deleteTask', methods=['DELETE'])
+@app.route('/api/deleteTask', methods=['DELETE'])
 def deleteTask():
     # Collect the id of a current task
     taskID = int(request.get_json()['id'])

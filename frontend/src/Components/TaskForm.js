@@ -29,7 +29,7 @@ const TaskForm = ({ onNewTask, onNewSearchTask }) => {
             'checked': 0,
             'description': taskToAdd,
           }
-          const res = await fetch('/addTask', {
+          const res = await fetch('/api/addTask', {
             method: 'POST',
             headers: {
             "Content-Type": "application/json"

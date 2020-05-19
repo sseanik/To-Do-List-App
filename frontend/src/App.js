@@ -29,7 +29,7 @@ function App() {
   // URL is set in package.json with a Proxy (to prevent problems with CORS)
   // UseEffect cannot use async/await
   useEffect(() => {
-    fetch("/getTasks").then(response =>
+    fetch("/api/getTasks").then(response =>
       response.json().then(data => {
         setTasks(data.tasks);
       })
