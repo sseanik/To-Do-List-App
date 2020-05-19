@@ -51,67 +51,65 @@ const Tasks = ({ tasks, onDeleteTask, onEditTask, onEditSearchTask, onDeleteSear
       {// For each task we want to return a list item, use the id (unique) as a key
       tasks.map(task => {
         // Render each task as a list item
-        if (task !== undefined) {
-          return (
-            <ListItem key={task.id}>
-            <Checkbox
-              onChange={async() => {
-                // Determine if task will be checked or unchecked
-                if (task.checked === 0) {
-                  task.checked = 1
-                  console.log(checks);
-                } else {
-                  task.checked = 0
-                }
-                // Update task as checked/not checked
-                const res = await fetch('/checkTask', {
-                  method: 'PUT',
-                  headers: {
-                    "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify({
-                    'id': task.id,
-                    'checked': task.checked
-                  })                   
-                });
-                if (res.ok) {
-                  // Update state task as checked/not checked
-                  return setChecks([]);
-                }                         
-              }}
-              checked={check(task.checked)}
-            />
-            <ListItemText>
-              {task.description}
-            </ListItemText>
-            <IconButton aria-label="Edit Task" 
-              onClick={() => handleTask(task)}
-            >
-            <EditIconOutlined />      
-            </IconButton>    
-            <IconButton aria-label="Delete Task"
-              onClick={async() => {
-                // Delete task
-                const res = await fetch('/deleteTask', {
-                  method: 'DELETE',
-                  headers: {
-                    "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify({'id': task.id})                   
-                });
-                if (res.ok) {
-                  // Delete task from state list and search state list
-                  onDeleteTask(task);
-                  onDeleteSearchTask(task);
-                }
-              }} 
-            >
-            <DeleteOutlined />
-            </IconButton>
-            </ListItem>
-          )
-        }
-    return true})}
+        return (
+          <ListItem key={task.id}>
+          <Checkbox
+            onChange={async() => {
+              // Determine if task will be checked or unchecked
+              if (task.checked === 0) {
+                task.checked = 1
+                console.log(checks);
+              } else {
+                task.checked = 0
+              }
+              // Update task as checked/not checked
+              const res = await fetch('/checkTask', {
+                method: 'PUT',
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  'id': task.id,
+                  'checked': task.checked
+                })                   
+              });
+              if (res.ok) {
+                // Update state task as checked/not checked
+                return setChecks([]);
+              }                         
+            }}
+            checked={check(task.checked)}
+          />
+          <ListItemText>
+            {task.description}
+          </ListItemText>
+          <IconButton aria-label="Edit Task" 
+            onClick={() => handleTask(task)}
+          >
+          <EditIconOutlined />      
+          </IconButton>    
+          <IconButton aria-label="Delete Task"
+            onClick={async() => {
+              // Delete task
+              const res = await fetch('/deleteTask', {
+                method: 'DELETE',
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({'id': task.id})                   
+              });
+              if (res.ok) {
+                // Delete task from state list and search state list
+                onDeleteTask(task);
+                onDeleteSearchTask(task);
+              }
+            }} 
+          >
+          <DeleteOutlined />
+          </IconButton>
+          </ListItem>
+        )
+      })}
     </List>
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Edit Task</DialogTitle>
@@ -155,7 +153,7 @@ const Tasks = ({ tasks, onDeleteTask, onEditTask, onEditSearchTask, onDeleteSear
             'description': newTaskDescription,
             'checked': taskToEdit.checked
           });
-          setOpen();
+          setOpen(false);
         }
       }} color="primary">
       Submit

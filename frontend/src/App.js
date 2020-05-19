@@ -40,6 +40,15 @@ function App() {
     <div className="App">
     <Header
       onSearchTask = {query => {
+        if (query.length === 0) {
+          setSearchTasks(searchTasks => [])
+        } else {
+          setSearchTasks(tasks
+            .filter(item => item.description.toLowerCase().includes(query.toLowerCase()))
+            .map(item => item)
+          )
+        }
+        /*
         setSearchTasks(tasks.map((item) => {
           // If the search query is empty
           if (query.length === 0) {
@@ -50,7 +59,8 @@ function App() {
             return item;
           } 
         }))
-    }}
+        */
+      }}
     >
     </Header>
     <Container maxWidth="md" style={{marginBottom: 16}} >
@@ -83,7 +93,7 @@ function App() {
             // Edited task found
             if (item !== undefined && item.id === task.id) {
               return task;
-            } else if (item !== undefined) {
+            } else {
               return item;
             }
           }))
