@@ -25,6 +25,9 @@ services:
          - ./frontend/public:/usr/src/app/public
         links:
         - "backend:backend"
+        env_file:
+        - .env
+
 
     nginx:
         image: nginx:1.13 # this will use the latest version of 1.13.x
