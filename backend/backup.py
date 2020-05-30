@@ -1,12 +1,9 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify
 import sqlite3
-import os
 
-app = Flask(__name__, static_folder='../frontend/build/')
+app = Flask(__name__)
 
 # Helper function for adding, editing and deleting from database
-
-
 def databaseExecute(query, parameters):
     try:
         con = sqlite3.connect('database/database.db')
@@ -18,7 +15,6 @@ def databaseExecute(query, parameters):
     except:
         return False
 
-
 def getAutoID(task):
     con = sqlite3.connect('database/database.db')
     cur = con.cursor()
@@ -28,13 +24,6 @@ def getAutoID(task):
     con.close()
     return max(ids)[0]
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    if path != "" and os.path.exists(app.static_folder + '/' + path):
-        return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/getTasks', methods=['GET'])
 def getTasks():
@@ -50,7 +39,7 @@ def getTasks():
         tasks.append({'id': tup[0],
                       'checked': tup[1],
                       'description': tup[2],
-                      })
+                    })
     return jsonify({'tasks': tasks})
 
 
@@ -64,7 +53,6 @@ def addTask():
     newID = getAutoID(description)
     return jsonify({'id': newID})
 
-
 @app.route('/api/editTask', methods=['PUT'])
 def editTask():
     # Collect the id and description of current task
@@ -74,7 +62,6 @@ def editTask():
     query = "UPDATE tasks SET description = ? WHERE id = ?"
     result = databaseExecute(query, (description, id))
     return jsonify(success=result)
-
 
 @app.route('/api/checkTask', methods=['PUT'])
 def checkTask():
@@ -86,7 +73,6 @@ def checkTask():
     result = databaseExecute(query, (checked, id))
     return jsonify(success=result)
 
-
 @app.route('/api/deleteTask', methods=['DELETE'])
 def deleteTask():
     # Collect the id of a current task
@@ -96,6 +82,6 @@ def deleteTask():
     result = databaseExecute(query, (taskID,))
     return jsonify(success=result)
 
+if __name__== "__main__":
+    app.run(host="0.0.0.0", port=5001)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0")
