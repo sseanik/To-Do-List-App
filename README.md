@@ -1,6 +1,6 @@
 # To Do List App
 
-## Live Demo: http://seanik.codes/
+## Live Demo: http://todo.seanik.codes/
 
 **Frontend**: ReactJS + Material UI
 
