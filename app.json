@@ -1,0 +1,6 @@
+{
+  "name": "To Do List Web App",
+  "description": "A Flask Backend, SQLite3 Database and React built frontend",
+  "repository": "https://github.com/sseanik/To-Do-List-App",
+  "keywords": ["flask", "sqlite", "react"]
+}
