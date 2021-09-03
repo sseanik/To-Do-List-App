@@ -1,7 +1,0 @@
-DROP TABLE IF EXISTS tasks;
-
-CREATE TABLE tasks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    checked BOOLEAN NOT NULL,
-    description VARCHAR(100) NOT NULL
-);
