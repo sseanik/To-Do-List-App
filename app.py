@@ -33,10 +33,8 @@ def getAutoID(task):
 @app.route("/<path:path>")
 def serve(path):
     if path != "" and os.path.exists(f"{app.static_folder}/{path}"):
-        print(f"TRUE: {app.static_folder}/{path} ----------------------------------")
         return send_from_directory(app.static_folder, path)
     else:
-        print(f"FALSE: {app.static_folder}/{path} ----------------------------------")
         return send_from_directory(app.static_folder, "index.html")
 
 
