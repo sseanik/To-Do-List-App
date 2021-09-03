@@ -8,7 +8,8 @@ A single page To Do List application built using React, Flask and SQLite3. The f
 
 ## [Live Demo](https://spooky-todo-list.herokuapp.com/)
 
-Functionality:
+### Functionality:
+
 * A user can add a task
 * A user can check or uncheck a task
 * They can edit a task
