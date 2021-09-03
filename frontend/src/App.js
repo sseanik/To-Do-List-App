@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import React, { useEffect, useState } from 'react';
+import './App.css';
 
-import { Container } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
+import { Container } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
 
-import Header from "./Components/Header";
-import Tasks from "./Components/Tasks";
-import TaskForm from "./Components/TaskForm";
-
-// Check if the search task state is populated
-function chooseTaskList(tasks, searchTasks) {
-  if (searchTasks.length > 0) {
-    return searchTasks;
-  } else {
-    return tasks;
-  }
-}
+import Header from './Components/Header';
+import Tasks from './Components/Tasks';
+import TaskForm from './Components/TaskForm';
 
 function App() {
   // Once we get data from the api, we transfer it into state
   const [tasks, setTasks] = useState([]);
   const [searchTasks, setSearchTasks] = useState([]);
+  const [query, setQuery] = useState('');
+
+  // Check if the search task state is populated
+  function chooseTaskList(tasks, searchTasks) {
+    if (query.length > 0) {
+      return searchTasks;
+    } else {
+      return tasks;
+    }
+  }
 
   // Make Api call to Flask Server and render tasks (React Hooks)
   // Only called when component first mounts
   // URL is set in package.json with a Proxy (to prevent problems with CORS)
   // UseEffect cannot use async/await
   useEffect(() => {
-    fetch("/api/getTasks").then((response) =>
+    fetch('/api/getTasks').then((response) =>
       response.json().then((data) => {
         setTasks(data.tasks);
       })
@@ -35,23 +36,22 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className='App'>
       <Header
         onSearchTask={(query) => {
+          setQuery(query);
           if (query.length === 0) {
             setSearchTasks((searchTasks) => []);
           } else {
             setSearchTasks(
-              tasks
-                .filter((item) =>
-                  item.description.toLowerCase().includes(query.toLowerCase())
-                )
-                .map((item) => item)
+              tasks.filter((item) =>
+                item.description.toLowerCase().includes(query.toLowerCase())
+              )
             );
           }
         }}
       ></Header>
-      <Container maxWidth="md" style={{ marginBottom: 16 }}>
+      <Container maxWidth='md' style={{ marginBottom: 16 }}>
         <TaskForm
           // Add created task to state list
           // Prop passed in to the task, called whenever there is a new task
